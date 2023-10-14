@@ -15,16 +15,34 @@ function createGrid(gridSize) {
       gridSquare.setAttribute("id", "grid " + (counter + 1));
       gridSquare.setAttribute("class", "grid-square");
 
-      gridSquare.addEventListener("mouseenter", () => {
-        console.log("Hovered!");
-        gridSquare.style.backgroundColor = `rgb(${randomRGB()})`;
-      });
+      gridSquare.addEventListener("mouseenter", () =>
+        gridSquareHover(gridSquare)
+      );
+      gridSquare.addEventListener("click", () => darkenColor(gridSquare));
       gridRowContainer.appendChild(gridSquare);
     }
     grid.push(gridRowContainer);
   }
   gridContainer.append(...grid);
   return gridContainer;
+}
+// function to darken the grid square
+function darkenColor(element) {
+  const DARKEN_AMOUNT = 10;
+  let color = element.style.backgroundColor;
+  color = color.slice(3).replace(/[()]/g, "").split(",");
+
+  for (let c = 0; c < color.length; c++) {
+    if (color[c] > 0) color[c] = Number(color[c]) - DARKEN_AMOUNT;
+  }
+
+  color = color.join(",");
+  color = `rgb(${color})`;
+  element.style.backgroundColor = color;
+}
+// function to handle hover effect of grid square
+function gridSquareHover(element) {
+  element.style.backgroundColor = `rgb(${randomRGB()})`;
 }
 // function for randomizing the color
 function randomRGB() {
@@ -34,7 +52,7 @@ function randomRGB() {
     if (count == 3) color = color + `${Math.floor(Math.random() * 255)}`;
     else color = color + `${Math.floor(Math.random() * 255)},`;
   }
-  console.log(color);
+
   return color;
 }
 
