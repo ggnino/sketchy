@@ -84,15 +84,9 @@ function setToggle() {
   const btn = document.getElementById("rgb-btn");
   if (myToggle) {
     myToggle = false;
-    btn.style.backgroundColor = "royalblue";
-    btn.style.borderColor = "royalblue";
-    btn.style.color = "white";
-    btn.style.transform = "scale(1)";
+    btn.setAttribute("class", "grid-btn");
   } else {
-    btn.style.backgroundColor = "gold";
-    btn.style.borderColor = "gold";
-    btn.style.color = "black";
-    btn.style.transform = "scale(1.2)";
+    btn.setAttribute("class", "grid-btn myHover");
     myToggle = true;
   }
 }
