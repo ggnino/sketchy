@@ -81,8 +81,20 @@ function changeGridSize() {
 }
 
 function setToggle() {
-  if (myToggle) myToggle = false;
-  else myToggle = true;
+  const btn = document.getElementById("rgb-btn");
+  if (myToggle) {
+    myToggle = false;
+    btn.style.backgroundColor = "royalblue";
+    btn.style.borderColor = "royalblue";
+    btn.style.color = "white";
+    btn.style.transform = "scale(1)";
+  } else {
+    btn.style.backgroundColor = "gold";
+    btn.style.borderColor = "gold";
+    btn.style.color = "black";
+    btn.style.transform = "scale(1.2)";
+    myToggle = true;
+  }
 }
 function getToggle() {
   return myToggle;
