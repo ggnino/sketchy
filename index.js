@@ -1,3 +1,4 @@
+let myToggle = false;
 // function for creating the sketch grid
 function createGrid(gridSize) {
   let gridContainer = document.createElement("div");
@@ -41,7 +42,10 @@ function darkenColor(element) {
 }
 // function to handle hover effect of grid square
 function gridSquareHover(element) {
-  element.style.backgroundColor = `rgb(${randomRGB()})`;
+  const toggle = getToggle();
+
+  if (toggle) element.style.backgroundColor = `rgb(${randomRGB()})`;
+  else element.style.backgroundColor = "black";
 }
 // function for randomizing the color
 function randomRGB() {
@@ -76,6 +80,14 @@ function changeGridSize() {
   document.getElementById("grid-btn").textContent = `GRID SIZE (${userSize})`;
 }
 
+function setToggle() {
+  if (myToggle) myToggle = false;
+  else myToggle = true;
+}
+function getToggle() {
+  return myToggle;
+}
+
 // function for displaying sketch grid
 function displayGrid() {
   const body = document.getElementsByTagName("body")[0];
@@ -87,6 +99,7 @@ function displayGrid() {
   const GRID = createGrid(SIZE);
 
   gridBtn.addEventListener("click", changeGridSize);
+  rgbBtn.addEventListener("click", setToggle);
   gridBtn.textContent = `GRID SIZE (${SIZE})`;
   rgbBtn.textContent = "RGB";
   heading.textContent = "Sketchy Pad";
@@ -96,6 +109,7 @@ function displayGrid() {
   gridBtn.setAttribute("class", "grid-btn");
   gridBtn.setAttribute("id", "grid-btn");
   rgbBtn.setAttribute("class", "grid-btn");
+  rgbBtn.setAttribute("id", "rgb-btn");
 
   btnContainer.append(gridBtn, rgbBtn);
   body.append(heading, btnContainer, GRID);
